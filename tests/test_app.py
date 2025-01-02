@@ -4,8 +4,9 @@ import sys
 import pytest
 
 # Adicionando o diretório pai para sys.path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from app import User, app, db
+base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.join(base_path, 'src'))
+from app import app, db
 
 
 @pytest.fixture
@@ -85,8 +86,9 @@ def test_update_user(client):
     response = client.put(f'/users/{user_id}', json=data)
     assert response.status_code == 200
 
-    updated_user = User.query.get(user_id)
-    assert updated_user.name == 'Maria Silva'
+    response = client.get(f'/users/{user_id}')
+    assert response.status_code == 200
+    assert response.json['name'] == 'Maria Silva'
 
 
 def test_delete_nonexistent_user(client):

@@ -8,6 +8,7 @@ Este projeto é uma aplicação Flask simples que permite realizar operações C
 * Flask
 * SQLAlchemy
 * SQLite
+* Docker
 
 ## Pré-requisitos
 * Docker devidamente instalado: [docs](https://docs.docker.com/engine/install/)
